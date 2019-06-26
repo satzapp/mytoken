@@ -28,7 +28,7 @@ contract MyToken {
     }
 
     function transfer(address _to, uint256 _value) public returns (bool success) {
-        require(balanceOf[msg.sender] >= _value, '');
+        require(balanceOf[msg.sender] >= _value, 'error message must contain revert');
 
         balanceOf[msg.sender] -= _value;
         balanceOf[_to] += _value;
@@ -46,7 +46,7 @@ contract MyToken {
     }
 
     function transferFrom(address _from, address _to, uint256 _value) public returns (bool success) {
-        require(_value <= balanceOf[_from], '');
+        require(_value <= balanceOf[_from], 'cannot transfer value larger than approved amount');
         require(_value <= allowance[_from][msg.sender], '');
 
         balanceOf[msg.sender] -= _value;
